@@ -1,0 +1,48 @@
+<template>
+  <v-container class="bg-black">
+    <div v-if="loginStatus" class="d-flex justify-center align-center">
+
+      <v-btn  class="mb-5" color="blue-darken-2" @click="adminIn" block>
+        Admin
+        <v-icon icon="mdi-arrow-right" end></v-icon>
+      </v-btn>
+      </div>
+      <div v-if="loginStatus" class="d-flex justify-center align-center">
+      <v-btn color="red-darken-2" @click="logOut" block>
+        <v-icon icon="mdi-arrow-left" start></v-icon>
+        Logout
+      </v-btn>
+    </div>
+    <div v-else class="d-flex justify-center">
+      <v-btn color="green-darken-2" @click="singIn" block>
+        Login
+        <v-icon icon="mdi-arrow-right" end></v-icon>
+      </v-btn>
+    </div>
+  </v-container>
+</template>
+
+<script setup>
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+
+const router = useRouter();
+const isLogged = useState('isLogged', () => false);
+const loginStatus = computed(() => {
+  return isLogged.value;
+});
+
+const singIn = () => {
+  router.push('/LoginView');
+};
+
+const adminIn = () => {
+  router.push('/AdminView');
+};
+
+const logOut = () => {
+  isLogged.value = false;
+  router.push('/');
+  window.location.reload();
+};
+</script>

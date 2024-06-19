@@ -1,0 +1,72 @@
+<template>
+  <v-app class="h-0">
+    <v-navigation-drawer v-model="drawer" temporary>
+      
+
+      <LoginComponent />
+
+      <div class="bg-black d-flex align-center">
+        <v-btn v-for="icon in icons" :key="icon.icoo" :icon="icon.icoo" :href="icon.src" size="small" variant="plain"
+          target="_blank" class="ml-5"></v-btn>
+      </div>
+
+      <h3 class="d-flex justify-center">Rafael Santos - Portfolio &copy;</h3>
+    </v-navigation-drawer>
+
+    <v-app-bar color="grey-lighten-2" prominent>
+      <v-row class="d-flex justify-space-around">
+      <v-btn  icon @click.stop="drawer = !drawer">
+            <v-icon color="blue-darken-2" size="large">mdi-menu</v-icon>
+            <span class="text-blue-darken-2">Menu</span>
+          </v-btn>
+
+      
+        <nuxt-link to="/" exact>
+          <v-btn icon>
+            <v-icon color="blue-darken-2" size="large">mdi-home</v-icon>
+            <span>Home</span>
+          </v-btn>
+        </nuxt-link>
+
+        <nuxt-link to="/Contact">
+          <v-btn icon>
+            <v-icon color="blue-darken-2" size="large">mdi-account-box</v-icon>
+            <span>Contato</span>
+          </v-btn>
+        </nuxt-link>
+
+        <nuxt-link to="/About">
+          <v-btn icon>
+            <v-icon color="blue-darken-2" size="large">mdi-book-open-blank-variant</v-icon>
+            <span>Sobre</span>
+          </v-btn>
+        </nuxt-link>
+        
+      </v-row>
+      
+    </v-app-bar>
+  </v-app>
+  
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      drawer: false,
+      icons: [
+        { icoo: 'mdi-github', src: 'https://github.com/Rafasennin' },
+        { icoo: 'mdi-linkedin', src: 'https://www.linkedin.com/in/rafael-d-santos-24a1098b' },
+        { icoo: 'mdi-instagram', src: 'https://www.instagram.com/rafasennin7/' },
+        { icoo: 'mdi-youtube', src: 'https://youtube.com/channel/UC7cYXH0h-RylVwe6y9JIUIQ' },
+      ],
+    };
+  }
+};
+</script>
+
+<style scoped>
+.v-app {
+ 
+}
+</style>
