@@ -61,7 +61,8 @@ export default {
         'Vue Router',
         'Vuex',
         'Vuetify',
-        'Express'
+        'Express',
+        'Nuxt 3'
       ]
     };
   },

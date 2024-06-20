@@ -12,7 +12,7 @@
 
         <p class="article__p">
             Sou desenvolvedor full-stack com experiência em projetos freelancers. Meu foco se
-            concentra em tecnologias como Node.js, MongoDB, Vue e Vuetify. Tenho dedicado meu tempo ao aprimoramento
+            concentra em tecnologias como Node.js, MongoDB, Vue 3 e Vuetify e Nuxt 3. Tenho dedicado meu tempo ao aprimoramento
             contínuo nessas áreas, buscando sempre novos desafios e oportunidades para desenvolver-me.<br>
         </p>
 

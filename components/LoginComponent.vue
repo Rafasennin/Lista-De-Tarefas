@@ -10,13 +10,20 @@
       <div v-if="loginStatus" class="d-flex justify-center align-center">
       <v-btn color="red-darken-2" @click="logOut" block>
         <v-icon icon="mdi-arrow-left" start></v-icon>
-        Logout
+        Sair
       </v-btn>
     </div>
-    <div v-else class="d-flex justify-center">
+    <div v-if="!loginStatus" class="d-flex justify-center mb-5">
       <v-btn color="green-darken-2" @click="singIn" block>
-        Login
+        Entrar
         <v-icon icon="mdi-arrow-right" end></v-icon>
+      </v-btn>
+    </div>
+
+    <div v-if="!loginStatus" class="d-flex justify-center">
+      <v-btn color="blue-darken-2" @click="singUp" block>
+        Criar conta
+        <v-icon icon="mdi-arrow-up" end></v-icon>
       </v-btn>
     </div>
   </v-container>
@@ -34,6 +41,10 @@ const loginStatus = computed(() => {
 
 const singIn = () => {
   router.push('/LoginView');
+};
+
+const singUp = () => {
+  router.push('/SingUp');
 };
 
 const adminIn = () => {

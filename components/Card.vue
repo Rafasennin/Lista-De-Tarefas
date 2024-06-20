@@ -4,7 +4,7 @@
       <v-text-field v-model="taskAuthor" label="Autor"></v-text-field>
       <v-text-field v-model="taskName" label="Título da tarefa"></v-text-field>
       <v-text-field v-model="taskDate" label="Data de criação" readonly></v-text-field>
-      <v-date-input v-model="taskReminderDate" label="Data do lembrete"></v-date-input>
+      <v-text-field v-model="taskReminderDate" label="Data do lembrete" type="date"></v-text-field>
       <v-text-field v-model="taskReminderHour" label="Hora do lembrete" type="time"></v-text-field>
       <v-textarea v-model="taskContent" label="Descreva sua tarefa"></v-textarea>
       <v-row>
@@ -84,9 +84,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
-import { VDateInput } from 'vuetify/labs/VDateInput';
-import { VTimePicker } from 'vuetify/labs/VTimePicker'
-
 
 const router = useRouter();
 const isLogged = useState('isLogged', () => false);

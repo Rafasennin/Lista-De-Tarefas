@@ -2,7 +2,6 @@
   <v-app class="h-0">
     <v-navigation-drawer v-model="drawer" temporary>
       
-
       <LoginComponent />
 
       <div class="bg-black d-flex align-center">
@@ -10,7 +9,7 @@
           target="_blank" class="ml-5"></v-btn>
       </div>
 
-      <h3 class="d-flex justify-center">Rafael Santos - Portfolio &copy;</h3>
+      <h3 class="d-flex justify-center">Rafael Santos  &copy;</h3>
     </v-navigation-drawer>
 
     <v-app-bar color="grey-lighten-2" prominent>
