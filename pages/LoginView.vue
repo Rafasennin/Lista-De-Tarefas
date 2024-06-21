@@ -16,6 +16,10 @@
             <v-btn :to="homeLink" class="mt-4 mb-2" color="primary" type="button" size="large" variant="elevated">
               Voltar
             </v-btn>
+            <v-row class="d-flex justify-center mt-5">
+              <v-progress-circular v-if="fetchStatus" color="primary" indeterminate :size="74"
+                :width="8"></v-progress-circular>
+            </v-row>
           </div>
         </v-form>
       </v-card>
@@ -28,8 +32,8 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import store from '~/store/index';
+import { computed } from 'vue';
 
-const SecretPsw = "Senha123";
 
 const router = useRouter();
 
@@ -67,6 +71,7 @@ const validateInput = () => {
 };
 
 const login = async () => {
+  store.commit('SET_FETCHING', true);
   if (!validateInput()) {
     return;
   }
@@ -88,12 +93,17 @@ const login = async () => {
     // Armazenar o nome do usuário no Vuex 
     store.commit('SET_USER_NAME', user.userName);
     store.commit('SET_LOGGED', true);
+    store.commit('SET_FETCHING', false);
     router.push('/');
   } catch (error) {
     console.error('Erro ao validar usuário:', error);
     alert('Ocorreu um erro ao validar o usuário. Por favor, tente novamente mais tarde.');
   }
 };
+
+const fetchStatus = computed(() => {
+  return store.state.isFetching;
+});
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;

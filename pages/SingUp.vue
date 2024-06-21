@@ -67,11 +67,11 @@ import store from '~/store/index';
 
 const router = useRouter();
 
-const userName = ref('teste');
-const email = ref('teste@teste.com');
-const confirmEmail = ref('teste@teste.com');
-const password = ref('Senha123');
-const confirmPassword = ref('Senha123');
+const userName = ref('');
+const email = ref('');
+const confirmEmail = ref('');
+const password = ref('');
+const confirmPassword = ref('');
 const showPassword = ref(false);
 const homeLink = '/';
 const isLoading = computed(() => store.state.isLoading);
