@@ -1,5 +1,5 @@
 <template>
-  <v-container class="bg-black mt-16">
+  <v-container class="bg-black mt-2">
     <form @submit.prevent="addTask">
       <v-text-field v-model="taskAuthor" label="Autor"></v-text-field>
       <v-text-field v-model="taskName" label="Título da tarefa"></v-text-field>

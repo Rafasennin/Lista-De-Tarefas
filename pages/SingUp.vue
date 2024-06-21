@@ -39,7 +39,7 @@
               </v-col>
 
               <v-col cols="12" class="d-flex justify-center">
-                <v-btn color="success" @click="registerUser" size="large" type="submit" variant="elevated">
+                <v-btn color="success" @click="registerUser" size="large" type="button" variant="elevated">
                   Registrar
                 </v-btn>
               </v-col>

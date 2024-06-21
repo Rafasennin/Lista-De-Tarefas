@@ -11,7 +11,7 @@
             required></v-text-field>
           <div class="d-flex flex-column">
             <v-btn color="success" block @click="login" size="large" type="button" variant="elevated">
-              Logar
+              Entrar
             </v-btn>
             <v-btn :to="homeLink" class="mt-4 mb-2" color="primary" type="button" size="large" variant="elevated">
               Voltar
@@ -34,7 +34,7 @@ const SecretPsw = "Senha123";
 const router = useRouter();
 
 const email = ref('rafasennin@hotmail.com');
-const password = ref('Senha123');
+const password = ref('Sennin007');
 const showPassword = ref(false);
 const homeLink = '/';
 
@@ -84,6 +84,9 @@ const login = async () => {
       alert('Senha inválida. Por favor, contate o administrador.');
       return;
     }
+
+    // Armazenar o nome do usuário no Vuex 
+    store.commit('SET_USER_NAME', user.userName);
     store.commit('SET_LOGGED', true);
     router.push('/');
   } catch (error) {

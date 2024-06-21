@@ -1,27 +1,26 @@
 <template>
   <v-container class="bg-black">
-    <div v-if="loginStatus" class="d-flex justify-center align-center">
-
+    <!--<div v-if="loginStatus" class="d-flex justify-center align-center">
       <v-btn  class="mb-5" color="blue-darken-2" @click="adminIn" block>
         Admin
         <v-icon icon="mdi-arrow-right" end></v-icon>
       </v-btn>
-      </div>
+      </div>-->
       <div v-if="loginStatus" class="d-flex justify-center align-center">
-      <v-btn color="red-darken-2" @click="logOut" block>
+      <v-btn color="red-darken-2" @click="logOut" class="w-75">
         <v-icon icon="mdi-arrow-left" start></v-icon>
         Sair
       </v-btn>
     </div>
     <div v-if="!loginStatus" class="d-flex justify-center mb-5">
-      <v-btn color="green-darken-2" @click="singIn" block>
+      <v-btn color="green-darken-2" @click="singIn" class="w-75">
         Entrar
         <v-icon icon="mdi-arrow-right" end></v-icon>
       </v-btn>
     </div>
 
     <div v-if="!loginStatus" class="d-flex justify-center">
-      <v-btn color="blue-darken-2" @click="singUp" block>
+      <v-btn color="blue-darken-2" @click="singUp" class="w-75">
         Criar conta
         <v-icon icon="mdi-arrow-up" end></v-icon>
       </v-btn>
