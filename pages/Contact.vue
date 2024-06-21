@@ -62,7 +62,7 @@ const sendContact = async () => {
     isLoading.value = true;
 
     try {
-      await axios.post('https://rafael-portfolio-back-end.vercel.app/contatos', contato.value);
+      await axios.post('https://lista-de-tarefas-back-end-plum.vercel.app/contatos', contato.value);
       console.log('Contato enviado:');
       // Limpar campos do formulário
       contato.value.name = '';

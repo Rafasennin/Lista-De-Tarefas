@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   // Se o usuário tentar acessar a página de administração e não estiver autenticado, redirecione para a tela de login
   if (to.path === '/AdminView' && !isLogged.value) {
     console.log("Usuário não autenticado, redirecionando para a tela de login");
-    return navigateTo('/');
+    return navigateTo('/LoginView');
   }
 
   // Caso contrário, permita o acesso à rota desejada

@@ -32,11 +32,11 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
+import store from '~/store/index';
 
 const router = useRouter();
-const isLogged = useState('isLogged', () => false);
 const loginStatus = computed(() => {
-  return isLogged.value;
+  return store.state.isLogged;
 });
 
 const singIn = () => {
@@ -52,7 +52,7 @@ const adminIn = () => {
 };
 
 const logOut = () => {
-  isLogged.value = false;
+  store.commit('SET_LOGGED', false);
   router.push('/');
   window.location.reload();
 };

@@ -84,11 +84,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
+import store from '~/store/index';
 
 const router = useRouter();
 const isLogged = useState('isLogged', () => false);
 
-const loginStatus = isLogged.value;
+
+const loginStatus = computed(() => {
+  return store.state.isLogged;
+});
 
 
 const getCurrentDate = () => {
@@ -120,7 +124,7 @@ const editTaskReminderHour = ref('');
 const getTasks = async () => {
   try {
     isFetching.value = true;
-    const response = await axios.get("https://lista-de-tarefas-back-end-lake.vercel.app/tasks");
+    const response = await axios.get("https://lista-de-tarefas-back-end-plum.vercel.app/tasks");
     tasks.value = response.data;
   } catch (error) {
     console.error("Erro ao buscar tarefas:", error);
@@ -141,7 +145,7 @@ const addTask = async () => {
         reminderDate: taskReminderDate.value,
         reminderHour: taskReminderHour.value
       };
-      await axios.post("https://lista-de-tarefas-back-end-lake.vercel.app/tasks", task);
+      await axios.post("https://lista-de-tarefas-back-end-plum.vercel.app/tasks", task);
       getTasks();
       taskAuthor.value = '';
       taskName.value = '';
@@ -161,7 +165,7 @@ const addTask = async () => {
 
 const deleteTask = async (taskId: string) => {
   try {
-    await axios.delete(`https://lista-de-tarefas-back-end-lake.vercel.app/tasks/${taskId}`);
+    await axios.delete(`https://lista-de-tarefas-back-end-plum.vercel.app/tasks/${taskId}`);
     getTasks();
   } catch (error) {
     console.error("Erro ao excluir tarefa:", error);
@@ -194,7 +198,7 @@ const confirmEditTask = async () => {
       reminderHour: editTaskReminderHour.value
     };
 
-    await axios.put(`https://lista-de-tarefas-back-end-lake.vercel.app/tasks/${editTaskId.value}`, updatedTask);
+    await axios.put(`https://lista-de-tarefas-back-end-plum.vercel.app/tasks/${editTaskId.value}`, updatedTask);
     closeEditModal();
     getTasks();
   } catch (error) {
