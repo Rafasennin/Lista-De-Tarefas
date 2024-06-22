@@ -37,10 +37,11 @@ import { computed } from 'vue';
 
 const router = useRouter();
 
-const email = ref('rafasennin@hotmail.com');
-const password = ref('Sennin007');
+const email = ref('');
+const password = ref('');
 const showPassword = ref(false);
 const homeLink = '/';
+
 
 const emailRules = [
   (value: string) => !!value || 'E-mail é obrigatório.',
@@ -73,6 +74,7 @@ const validateInput = () => {
 const login = async () => {
   store.commit('SET_FETCHING', true);
   if (!validateInput()) {
+    store.commit('SET_FETCHING', false);
     return;
   }
 
@@ -83,23 +85,28 @@ const login = async () => {
 
     if (!user) {
       alert('Usuário não cadastrado, contate o administrador.');
+      store.commit('SET_FETCHING', false);
       return;
     }
     if (user.password !== password.value) {
       alert('Senha inválida. Por favor, contate o administrador.');
+      store.commit('SET_FETCHING', false);
       return;
     }
 
-    // Armazenar o nome do usuário no Vuex 
+    // Armazenar o nome do usuário e o ID no Vuex 
     store.commit('SET_USER_NAME', user.userName);
+    store.commit('SET_USER_ID', user._id); 
     store.commit('SET_LOGGED', true);
     store.commit('SET_FETCHING', false);
     router.push('/');
   } catch (error) {
     console.error('Erro ao validar usuário:', error);
     alert('Ocorreu um erro ao validar o usuário. Por favor, tente novamente mais tarde.');
+    store.commit('SET_FETCHING', false);
   }
 };
+
 
 const fetchStatus = computed(() => {
   return store.state.isFetching;

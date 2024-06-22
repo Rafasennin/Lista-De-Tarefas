@@ -82,18 +82,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import axios from 'axios';
 import store from '~/store/index';
 
 const router = useRouter();
-const isLogged = useState('isLogged', () => false);
-
-
-const loginStatus = computed(() => {
-  return store.state.isLogged;
-});
-
+const userId = computed(() => store.state.userId);
+const loginStatus = computed(() => store.state.isLogged);
 
 const getCurrentDate = () => {
   const date = new Date();
@@ -103,15 +98,15 @@ const getCurrentDate = () => {
   return `${day}/${month}/${year}`;
 };
 
-const taskAuthor = useState('taskAuthor', () => '');
-const taskName = useState('taskName', () => '');
-const taskDate = useState('taskDate', () => getCurrentDate());
-const taskContent = useState('taskContent', () => '');
-const taskReminderDate = useState('taskReminderDate', () => '');
-const taskReminderHour = useState('taskReminderHour', () => '');
-const tasks = useState('tasks', () => []);
-const isAdding = useState('isAdding', () => false);
-const isFetching = useState('isFetching', () => false);
+const taskAuthor = ref('');
+const taskName = ref('');
+const taskDate = ref(getCurrentDate());
+const taskContent = ref('');
+const taskReminderDate = ref("");
+const taskReminderHour = ref('');
+const tasks = ref([]);
+const isAdding = ref(false);
+const isFetching = ref(false);
 
 const editModal = ref(false);
 const editTaskId = ref('');
@@ -124,7 +119,11 @@ const editTaskReminderHour = ref('');
 const getTasks = async () => {
   try {
     isFetching.value = true;
-    const response = await axios.get("https://lista-de-tarefas-back-end-plum.vercel.app/tasks");
+    const response = await axios.get("https://lista-de-tarefas-back-end-plum.vercel.app/tasks", {
+      params: {
+        userId: userId.value // Enviando o userId como parâmetro
+      }
+    });
     tasks.value = response.data;
   } catch (error) {
     console.error("Erro ao buscar tarefas:", error);
@@ -132,6 +131,7 @@ const getTasks = async () => {
     isFetching.value = false;
   }
 };
+
 
 const addTask = async () => {
   if (taskName.value && taskAuthor.value && taskContent.value) {
@@ -143,8 +143,10 @@ const addTask = async () => {
         date: getCurrentDate(),
         text: taskContent.value,
         reminderDate: taskReminderDate.value,
-        reminderHour: taskReminderHour.value
+        reminderHour: taskReminderHour.value,
+        userId: userId.value 
       };
+
       await axios.post("https://lista-de-tarefas-back-end-plum.vercel.app/tasks", task);
       getTasks();
       taskAuthor.value = '';
@@ -161,7 +163,6 @@ const addTask = async () => {
     alert("Por favor, preencha todos os campos obrigatórios.");
   }
 };
-
 
 const deleteTask = async (taskId: string) => {
   try {
@@ -181,7 +182,6 @@ const openEditModal = (task: any) => {
   editTaskReminderHour.value = task.reminderHour;
   editModal.value = true;
 };
-
 
 const closeEditModal = () => {
   editModal.value = false;
@@ -205,7 +205,6 @@ const confirmEditTask = async () => {
     console.error("Erro ao editar a tarefa:", error);
   }
 };
-
 
 getTasks();
 </script>

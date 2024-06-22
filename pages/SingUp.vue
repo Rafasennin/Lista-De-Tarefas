@@ -76,6 +76,7 @@ const showPassword = ref(false);
 const homeLink = '/';
 const isLoading = computed(() => store.state.isLoading);
 
+
 const nameRules = [
   (value) => !!value || 'Digite seu nome.',
   (value) => (value && value.length >= 3) || 'Digite um nome válido.'

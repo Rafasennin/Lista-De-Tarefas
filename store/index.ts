@@ -6,6 +6,8 @@ export default createStore({
     isLoading: false,
     isLogged: false,
     isFetching: false,
+    userId: null,
+    userName: '',
   },
   mutations: {
     SET_USER_NAME(state, status) {
@@ -22,6 +24,9 @@ export default createStore({
     },
     SET_FETCHING(state, status) {
       state.isFetching = status;
+    },
+    SET_USER_ID(state, status) {
+      state.userId = status;
     },
   },
   actions: {},
