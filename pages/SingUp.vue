@@ -65,6 +65,8 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 import store from '~/store/index';
 
+
+
 const router = useRouter();
 
 const userName = ref('');
@@ -115,7 +117,7 @@ const validateFields = () => {
     const userData = {
       userName: userName.value,
       email: email.value,
-      password: password.value
+      password: password.value,
     };
 
     return userData;
