@@ -36,8 +36,8 @@ import { computed } from 'vue';
 
 const router = useRouter();
 
-const email = ref('rafasennin@hotmail.com');
-const password = ref('Sennin007');
+const email = ref('');
+const password = ref('');
 const showPassword = ref(false);
 const homeLink = '/';
 
