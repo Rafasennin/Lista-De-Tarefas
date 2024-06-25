@@ -37,8 +37,8 @@ import { computed } from 'vue';
 
 const router = useRouter();
 
-const email = ref('');
-const password = ref('');
+const email = ref('rafasennin@hotmail.com');
+const password = ref('Sennin007');
 const showPassword = ref(false);
 const homeLink = '/';
 
@@ -88,18 +88,24 @@ const login = async () => {
       store.commit('SET_FETCHING', false);
       return;
     }
+
     if (user.password !== password.value) {
       alert('Senha inválida. Por favor, contate o administrador.');
       store.commit('SET_FETCHING', false);
       return;
     }
 
+    if (email.value == "rafasennin@hotmail.com" && user.password != undefined) {
+      store.commit('SET_ADMIN_LOGIN', true);
+    }
+
     // Armazenar o nome do usuário e o ID no Vuex 
     store.commit('SET_USER_NAME', user.userName);
-    store.commit('SET_USER_ID', user._id); 
+    store.commit('SET_USER_ID', user._id);
     store.commit('SET_LOGGED', true);
     store.commit('SET_FETCHING', false);
     router.push('/');
+    
   } catch (error) {
     console.error('Erro ao validar usuário:', error);
     alert('Ocorreu um erro ao validar o usuário. Por favor, tente novamente mais tarde.');

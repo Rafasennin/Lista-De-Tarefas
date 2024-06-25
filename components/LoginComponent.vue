@@ -1,11 +1,12 @@
 <template>
   <v-container class="bg-black">
-    <!--<div v-if="loginStatus" class="d-flex justify-center align-center">
-      <v-btn  class="mb-5" color="blue-darken-2" @click="adminIn" block>
+    <div v-if="adminStatus && loginStatus" class="d-flex justify-center align-center">
+      <v-btn  class="mb-5 w-75" color="blue-darken-2" @click="adminIn" >
         Admin
         <v-icon icon="mdi-arrow-right" end></v-icon>
       </v-btn>
-      </div>-->
+      </div>
+
       <div v-if="loginStatus" class="d-flex justify-center align-center">
       <v-btn color="red-darken-2" @click="logOut" class="w-75">
         <v-icon icon="mdi-arrow-left" start></v-icon>
@@ -14,7 +15,7 @@
     </div>
     <div v-if="!loginStatus" class="d-flex justify-center mb-5">
       <v-btn color="green-darken-2" @click="singIn" class="w-75">
-        Entrar
+        Login
         <v-icon icon="mdi-arrow-right" end></v-icon>
       </v-btn>
     </div>
@@ -34,8 +35,13 @@ import { computed } from 'vue';
 import store from '~/store/index';
 
 const router = useRouter();
+
 const loginStatus = computed(() => {
   return store.state.isLogged;
+});
+
+const adminStatus = computed(() => {
+  return store.state.isAdmin;
 });
 
 const singIn = () => {

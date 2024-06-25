@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 
 export default createStore({
   state: {
+    isAdmin: false,
     isAdding: false,
     isLoading: false,
     isLogged: false,
@@ -10,6 +11,9 @@ export default createStore({
     userName: '',
   },
   mutations: {
+    SET_ADMIN_LOGIN(state, status) {
+      state.isAdmin = status;
+    },
     SET_USER_NAME(state, status) {
       state.isUserName = status;
     },
