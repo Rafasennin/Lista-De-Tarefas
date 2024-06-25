@@ -4,9 +4,9 @@
       <v-row class="d-flex justify-center my-16 body-row" v-if="!isLoggedStatus">
         <v-col cols="12" class="text-center">
           <div ref="banner" class="banner">
-            <h1 class="display-1 font-weight-bold text-vivid mb-4">Lista de Tarefas</h1>
-            <p class="text-h5 text-light-vivid mb-2">Bem-vindo à aplicação de gerenciamento de tarefas!</p>
-            <p class="text-h6 text-light-vivid">
+            <h1 class="display-1 font-weight-bold text-red mb-4">Lista de Tarefas</h1>
+            <p class="text-h4 text-red-lighten-2 mb-2">Bem-vindo à aplicação de gerenciamento de tarefas!</p>
+            <p class="text-h5 text-red-lighten-2">
               Para começar, faça login se já estiver cadastrado ou cadastre-se para acessar sua lista de tarefas.
             </p>
           </div>
@@ -104,19 +104,7 @@
       font-size: 3rem;
       font-family: 'Lobster', cursive;
   }
-  
-  .text-vivid {
-      color: #ea2667; /* Vivid pink */
-  }
-  
-  .text-light-vivid {
-      color: #de1d5d; /* Light vivid pink */
-  }
-  
-  .bg-black {
-      background-color: #121212; /* Darker background for better contrast */
-  }
-  
+    
   .banner, .logged-status, .card, .login-component {
       animation: fadeIn 1.5s ease-in-out;
   }
