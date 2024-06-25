@@ -16,13 +16,12 @@
             <v-btn :to="homeLink" class="mt-4 mb-2" color="primary" type="button" size="large" variant="elevated">
               Voltar
             </v-btn>
-            <v-row class="d-flex justify-center mt-5">
-              <v-progress-circular v-if="fetchStatus" color="primary" indeterminate :size="74"
-                :width="8"></v-progress-circular>
-            </v-row>
           </div>
         </v-form>
       </v-card>
+      <v-row class="d-flex justify-center">
+        <v-progress-circular v-if="fetchStatus" color="primary" indeterminate :size="74" :width="8"></v-progress-circular>
+      </v-row>
     </v-sheet>
   </v-container>
 </template>
@@ -105,7 +104,7 @@ const login = async () => {
     store.commit('SET_LOGGED', true);
     store.commit('SET_FETCHING', false);
     router.push('/');
-    
+
   } catch (error) {
     console.error('Erro ao validar usuário:', error);
     alert('Ocorreu um erro ao validar o usuário. Por favor, tente novamente mais tarde.');
