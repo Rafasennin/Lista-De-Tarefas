@@ -16,11 +16,11 @@
     <v-table theme="dark" class="overflow-x-auto">
       <thead>
         <tr>
-          <th class="text-h5">ID</th>
-          <th class="text-h5">Nome</th>
-          <th class="text-h5">Email</th>
-          <th class="text-h5">Mensagem</th>
-          <th class="text-h5">Ações</th>
+          <th class="text-h5 text-center">ID</th>
+          <th class="text-h5 text-center">Nome</th>
+          <th class="text-h5 text-center">Email</th>
+          <th class="text-h5 text-center">Mensagem</th>
+          <th class="text-h5 text-center">Ações</th>
         </tr>
       </thead>
 
@@ -53,10 +53,10 @@
     <v-table theme="dark" class="overflow-x-auto">
       <thead>
         <tr>
-          <th class="text-h5">ID</th>
-          <th class="text-h5">Nome de Usuário</th>
-          <th class="text-h5">Email</th>
-          <th class="text-h5">Ações</th>
+          <th class="text-h5 text-center">ID</th>
+          <th class="text-h5 text-center">Nome</th>
+          <th class="text-h5 text-center">Email</th>
+          <th class="text-h5 text-center">Ações</th>
         </tr>
       </thead>
 
@@ -149,21 +149,6 @@ definePageMeta({
 
 
 <style scoped>
-.display-1 {
-    font-size: 3rem;
-}
-
-.text-center {
-    color: #fff;
-}
-
-.bg-black {
-    background-color: #000;
-}
-
-.overflow-x-auto {
-    overflow-x: auto;
-}
 
 .word-wrap-break {
     word-wrap: break-word;

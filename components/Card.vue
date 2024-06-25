@@ -22,12 +22,14 @@
     <v-table theme="dark" class="overflow-x-auto">
       <thead>
         <tr>
-          <th class="text-h5">Autor</th>
-          <th class="text-h5">Tarefa</th>
-          <th class="text-h5">Data</th>
-          <th class="text-h5">Descrição</th>
-          <th class="text-h5">Data de aviso</th>
-          <th class="text-h5">Hora de aviso</th>
+          <th class="text-h5 text-center">Autor</th>
+          <th class="text-h5 text-center">Tarefa</th>
+          <th class="text-h5 text-center">Data</th>
+          <th class="text-h5 text-center">Descrição</th>
+          <th class="text-h5 text-center">Data de aviso</th>
+          <th class="text-h5 text-center">Hora de aviso</th>
+          <th class="text-h5 text-center">Deletar</th>
+          <th class="text-h5 text-center">Editar</th>
         </tr>
       </thead>
       <tbody>
