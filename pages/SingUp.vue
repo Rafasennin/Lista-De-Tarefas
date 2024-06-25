@@ -136,7 +136,7 @@ const registerUser = async () => {
   store.commit('SET_LOADING', true);
   console.log('Loading state after SET_LOADING true:', store.state.isLoading);  // Verificação do estado
   try {
-    const response = await axios.post('http://localhost:8080/users', userData);
+    const response = await axios.post('https://lista-de-tarefas-back-end-plum.vercel.app/users', userData);
     if (response.status === 201) {
       alert('Usuário registrado com sucesso!');
       console.log('Registration successful, navigating to LoginView');
