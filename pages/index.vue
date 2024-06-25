@@ -1,7 +1,7 @@
 <template>
     <v-container class="bg-black py-5 h-100">
         <!-- Banner Explicativo -->
-        <v-row class="d-flex justify-center my-16 body-row">
+        <v-row class="d-flex justify-center my-16 body-row" v-if="!isLoggedStatus">
             <v-col cols="12" class="text-center">
                 <div ref="banner" class="banner">
                     <h1 class="display-1 font-weight-bold text-white mb-4">Lista de Tarefas</h1>
@@ -15,7 +15,7 @@
         </v-row>
 
         <!-- Validação de Login -->
-        <v-row v-if="isLoggedStatus" class="d-flex justify-center mt-4">
+        <v-row v-if="isLoggedStatus" class="d-flex justify-center mt-16">
             <v-col cols="12" class="text-center">
                 <div ref="loggedStatus" class="logged-status">
                     <h2 class="headline text-white">Logado como {{ getUserName }}</h2>
