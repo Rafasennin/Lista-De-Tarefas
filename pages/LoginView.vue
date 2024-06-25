@@ -33,14 +33,12 @@ import { useRouter } from 'vue-router';
 import store from '~/store/index';
 import { computed } from 'vue';
 
-
 const router = useRouter();
 
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 const homeLink = '/';
-
 
 const emailRules = [
   (value: string) => !!value || 'E-mail é obrigatório.',
@@ -78,31 +76,20 @@ const login = async () => {
   }
 
   try {
-    const response = await axios.get("https://lista-de-tarefas-back-end-plum.vercel.app/users");
-    const users = response.data;
-    const user = users.find(user => user.email === email.value);
+    const response = await axios.post("http://localhost:8080/login", {
+      email: email.value,
+      password: password.value
+    });
 
-    if (!user) {
-      alert('Usuário não cadastrado, contate o administrador.');
-      store.commit('SET_FETCHING', false);
-      return;
-    }
-
-    if (user.password !== password.value) {
-      alert('Senha inválida. Por favor, contate o administrador.');
-      store.commit('SET_FETCHING', false);
-      return;
-    }
-
-    if (email.value == "rafasennin@hotmail.com" && user.password != undefined) {
-      store.commit('SET_ADMIN_LOGIN', true);
-    }
+    const { user } = response.data;
 
     // Armazenar o nome do usuário e o ID no Vuex 
     store.commit('SET_USER_NAME', user.userName);
     store.commit('SET_USER_ID', user._id);
     store.commit('SET_LOGGED', true);
     store.commit('SET_FETCHING', false);
+
+    // Redirecionar para a página inicial
     router.push('/');
 
   } catch (error) {
@@ -111,7 +98,6 @@ const login = async () => {
     store.commit('SET_FETCHING', false);
   }
 };
-
 
 const fetchStatus = computed(() => {
   return store.state.isFetching;
