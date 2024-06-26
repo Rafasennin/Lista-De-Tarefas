@@ -20,7 +20,8 @@
         </v-form>
       </v-card>
       <v-row class="d-flex justify-center">
-        <v-progress-circular v-if="fetchStatus" color="primary" indeterminate :size="74" :width="8"></v-progress-circular>
+        <v-progress-circular v-if="fetchStatus" color="primary" indeterminate :size="74"
+          :width="8"></v-progress-circular>
       </v-row>
     </v-sheet>
   </v-container>
@@ -81,13 +82,19 @@ const login = async () => {
       password: password.value
     });
 
-    const { user } = response.data;
+    const { token, user } = response.data;
 
     // Armazenar o nome do usuário e o ID no Vuex 
     store.commit('SET_USER_NAME', user.userName);
     store.commit('SET_USER_ID', user._id);
     store.commit('SET_LOGGED', true);
-    
+
+    // Armazenar o token no localStorage
+    localStorage.setItem('token', token);
+
+    // Definir o token no header Authorization para futuras requisições
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
     // Verificar se o usuário é admin
     if (email.value === 'rafasennin@hotmail.com' && password.value !== undefined) {
       store.commit('SET_ADMIN_LOGIN', true);
@@ -104,6 +111,7 @@ const login = async () => {
     store.commit('SET_FETCHING', false);
   }
 };
+
 
 
 const fetchStatus = computed(() => {
