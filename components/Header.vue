@@ -22,8 +22,8 @@
     </v-navigation-drawer>
 
     <v-app-bar color="grey-lighten-2" prominent>
-
-      <v-row :class="$vuetify.display.mdAndUp ?' d-flex justify-space-around' : 'd-flex justify-start ml-10'">
+      <!--Menu para telas pequenas-->
+      <v-row class="d-flex justify-space-between ml-16">
         <v-btn icon @click.stop="drawer = !drawer">
           <v-icon color="blue-darken-2" size="large">mdi-menu</v-icon>
           <span class="text-blue-darken-2">Menu</span>
@@ -43,18 +43,15 @@
           </v-btn>
         </nuxt-link>
 
-        <nuxt-link to="/About" class="hidden-sm-and-down">
+        <nuxt-link to="/About" class="hidden-sm-and-down mr-16">
           <v-btn icon>
             <v-icon color="blue-darken-2" size="large">mdi-book-open-blank-variant</v-icon>
             <span>Sobre</span>
           </v-btn>
         </nuxt-link>
-
       </v-row>
-
     </v-app-bar>
   </v-app>
-
 </template>
 
 <script>
