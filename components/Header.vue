@@ -23,7 +23,7 @@
 
     <v-app-bar color="grey-lighten-2" prominent>
 
-      <v-row :class="$vuetify.display.smAndDown ?'d-flex justify-start ml-10' : 'd-flex justify-space-around'">
+      <v-row :class="$vuetify.display.smAndDown ?' d-flex justify-space-around' : 'd-flex justify-start ml-10'">
         <v-btn icon @click.stop="drawer = !drawer">
           <v-icon color="blue-darken-2" size="large">mdi-menu</v-icon>
           <span class="text-blue-darken-2">Menu</span>
@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import { START_LOCATION } from 'vue-router';
+
 export default {
   data() {
     return {
