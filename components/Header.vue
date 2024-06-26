@@ -23,7 +23,7 @@
 
     <v-app-bar color="grey-lighten-2" prominent>
 
-      <v-row :class="$vuetify.display.smAndDownAndUp ?'d-flex justify-start ml-10' : 'd-flex justify-space-around'">
+      <v-row :class="$vuetify.display.smAndDown ?'d-flex justify-start ml-10' : 'd-flex justify-space-around'">
         <v-btn icon @click.stop="drawer = !drawer">
           <v-icon color="blue-darken-2" size="large">mdi-menu</v-icon>
           <span class="text-blue-darken-2">Menu</span>
