@@ -87,6 +87,12 @@ const login = async () => {
     store.commit('SET_USER_NAME', user.userName);
     store.commit('SET_USER_ID', user._id);
     store.commit('SET_LOGGED', true);
+    
+    // Verificar se o usuário é admin
+    if (email.value === 'rafasennin@hotmail.com' && password.value !== undefined) {
+      store.commit('SET_ADMIN_LOGIN', true);
+    }
+
     store.commit('SET_FETCHING', false);
 
     // Redirecionar para a página inicial
@@ -98,6 +104,7 @@ const login = async () => {
     store.commit('SET_FETCHING', false);
   }
 };
+
 
 const fetchStatus = computed(() => {
   return store.state.isFetching;

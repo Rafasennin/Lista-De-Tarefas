@@ -126,7 +126,6 @@ const validateFields = () => {
     return false;
   }
 };
-
 const registerUser = async () => {
   const userData = validateFields();
   if (!userData) {
@@ -148,8 +147,12 @@ const registerUser = async () => {
       return false;
     }
   } catch (error) {
-    console.error('Erro na solicitação de registro:', error);
-    alert('Erro ao registrar usuário. Por favor, tente novamente mais tarde.');
+    if (error.response && error.response.status === 409) {
+      alert('Email já está em uso. Por favor, use outro email.');
+    } else {
+      console.error('Erro na solicitação de registro:', error);
+      alert('Erro ao registrar usuário. Por favor, tente novamente mais tarde.');
+    }
     return false;
   } finally {
     store.commit('SET_LOADING', false);
