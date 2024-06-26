@@ -41,12 +41,12 @@
           <td>{{ task.reminderDate }}</td>
           <td>{{ task.reminderHour }}</td>
           <td>
-            <v-btn v-if="loginStatus" @click="deleteTask(task._id)" class="text-decoration-none bg-red-darken-4">
+            <v-btn v-if="loginStatus" @click="openDeleteModal(task._id, 'task')" class="text-decoration-none bg-red-darken-4">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </td>
           <td>
-            <v-btn v-if="loginStatus" @click="openEditModal(task)" class="text-decoration-none bg-blue-darken-2">
+            <v-btn @click="openEditModal(task)" class="text-decoration-none bg-blue-darken-4">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </td>
@@ -80,11 +80,27 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <!-- Modal for delete-->
+    <v-dialog v-model="deleteModal" max-width="230px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Confirma a deleção?</span>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDeleteModal">Cancelar</v-btn>
+          <v-btn color="red darken-1" text @click="confirmDelete">Confirmar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import store from '~/store/index';
 
@@ -117,6 +133,9 @@ const editTaskName = ref('');
 const editTaskContent = ref('');
 const editTaskReminderDate = ref('');
 const editTaskReminderHour = ref('');
+const deleteModal = ref(false);
+const deleteId = ref(null);
+const deleteType = ref('');
 
 const getTasks = async () => {
   try {
@@ -133,7 +152,6 @@ const getTasks = async () => {
     isFetching.value = false;
   }
 };
-
 
 const addTask = async () => {
   if (taskName.value && taskAuthor.value && taskContent.value) {
@@ -187,6 +205,31 @@ const openEditModal = (task: any) => {
 
 const closeEditModal = () => {
   editModal.value = false;
+  editTaskId.value = '';
+  editTaskAuthor.value = '';
+  editTaskName.value = '';
+  editTaskContent.value = '';
+  editTaskReminderDate.value = '';
+  editTaskReminderHour.value = '';
+};
+
+const openDeleteModal = (id, type) => {
+  deleteId.value = id;
+  deleteType.value = type;
+  deleteModal.value = true;
+};
+
+const closeDeleteModal = () => {
+  deleteModal.value = false;
+  deleteId.value = null;
+  deleteType.value = '';
+};
+
+const confirmDelete = () => {
+  if (deleteType.value === 'task') {
+    deleteTask(deleteId.value);
+  } 
+  closeDeleteModal();
 };
 
 const confirmEditTask = async () => {

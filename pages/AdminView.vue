@@ -2,13 +2,23 @@
   <v-container class="bg-black mt-16 h-100">
     <v-row class="text-center">
       <v-col cols="12">
-        <h1 class="my-5">Seção do Administrador</h1>
+        <h1 class="mt-10 mb-5">Seção do Administrador</h1>
       </v-col>
     </v-row>
-    
-     <v-divider></v-divider>
-<div class="space"></div>
 
+    <v-divider></v-divider>
+    <v-row class="d-flex align-center justify-center" style="height: 300px;">
+      <v-col cols="12" sm="8" md="6">
+        <v-alert type="info" class="my-4" style="height: 300px;">
+          <div>
+            <h3 class="mb-2">Instruções para Visualização</h3>
+            <p>Para melhor visualização, utilize a rolagem horizontal nas tabelas abaixo.</p>
+            <p>Se você estiver utilizando um dispositivo móvel, deslize a tabela para os lados.</p>
+            <p>Em caso de dúvidas ou problemas, entre em contato com o suporte.</p>
+          </div>
+        </v-alert>
+      </v-col>
+    </v-row>
 
     <!-- Usuários Registrados -->
     <v-row class="text-center mt-10">
@@ -16,7 +26,7 @@
         <h2 class="my-3">Usuários Registrados</h2>
       </v-col>
     </v-row>
-  
+
     <v-row class="overflow-x-auto">
       <v-col cols="12">
         <v-table theme="dark">
@@ -34,7 +44,7 @@
               <td>{{ usuario.userName }}</td>
               <td>{{ usuario.email }}</td>
               <td>
-                <v-btn @click="opendeleteModal" class="text-decoration-none bg-red-darken-4">
+                <v-btn @click="openDeleteModal(usuario._id, 'user')" class="text-decoration-none bg-red-darken-4">
                   <v-icon>mdi-delete</v-icon>
                 </v-btn>
               </td>
@@ -54,7 +64,6 @@
         <h2 class="my-3">Contatos Enviados</h2>
       </v-col>
     </v-row>
-  
 
     <v-row class="overflow-x-auto">
       <v-col cols="12">
@@ -106,7 +115,6 @@
     <FooterComponent />
   </v-container>
 </template>
-
 
 <script setup lang="ts">
 import axios from 'axios';
@@ -187,7 +195,6 @@ const confirmDelete = () => {
   closeDeleteModal();
 };
 
-
 // Chama getContatos e getUsuarios ao montar o componente
 onMounted(() => {
   getContatos();
@@ -197,10 +204,5 @@ onMounted(() => {
 definePageMeta({
   middleware: 'auth',
 });
-</script>
 
-<style scoped>
-.space{
-  height: 225px;
-}
-</style>
+</script>
