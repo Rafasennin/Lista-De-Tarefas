@@ -76,7 +76,7 @@ const login = async () => {
   }
 
   try {
-    const response = await axios.post("http://localhost:8080/login", {
+    const response = await axios.post("https://lista-de-tarefas-back-end-plum.vercel.app/login", {
       email: email.value,
       password: password.value
     });
