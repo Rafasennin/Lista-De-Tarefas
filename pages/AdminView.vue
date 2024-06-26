@@ -7,9 +7,9 @@
     </v-row>
 
     <v-divider></v-divider>
-    <v-row class="d-flex align-center justify-center" style="height: 300px;">
+    <v-row class="d-flex align-center justify-center" style="height: 400px;">
       <v-col cols="12" sm="8" md="6">
-        <v-alert type="info" class="my-4" style="height: 300px;">
+        <v-alert type="info" class="my-4" style="height: 210px;">
           <div>
             <h3 class="mb-2">Instruções para Visualização</h3>
             <p>Para melhor visualização, utilize a rolagem horizontal nas tabelas abaixo.</p>
