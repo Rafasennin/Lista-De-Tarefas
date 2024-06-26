@@ -5,43 +5,10 @@
         <h1 class="my-5">Seção do Administrador</h1>
       </v-col>
     </v-row>
+    
+     <v-divider></v-divider>
+<div class="space"></div>
 
-    <!-- Contatos Enviados -->
-    <v-row class="text-center">
-      <v-col cols="12">
-        <h2 class="my-3">Contatos Enviados</h2>
-      </v-col>
-    </v-row>
-
-    <v-table theme="dark" class="overflow-x-auto">
-      <thead>
-        <tr>
-          <th class="text-h5 text-center">ID</th>
-          <th class="text-h5 text-center">Nome</th>
-          <th class="text-h5 text-center">Email</th>
-          <th class="text-h5 text-center">Mensagem</th>
-          <th class="text-h5 text-center">Ações</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr class="text-center" v-for="contato in contatos" :key="contato._id">
-          <td>{{ contato._id }}</td>
-          <td>{{ contato.name }}</td>
-          <td>{{ contato.email }}</td>
-          <td class="word-wrap-break">{{ contato.message }}</td>
-          <td>
-            <v-btn @click="deleteContato(contato._id)" class="text-decoration-none bg-red-darken-4">
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
-
-    <v-row class="d-flex justify-center mt-5">
-      <v-progress-circular v-if="isFetching" color="primary" indeterminate :size="74" :width="8"></v-progress-circular>
-    </v-row>
 
     <!-- Usuários Registrados -->
     <v-row class="text-center mt-10">
@@ -49,50 +16,113 @@
         <h2 class="my-3">Usuários Registrados</h2>
       </v-col>
     </v-row>
+  
+    <v-row class="overflow-x-auto">
+      <v-col cols="12">
+        <v-table theme="dark">
+          <thead>
+            <tr>
+              <th class="text-h5 text-center">ID</th>
+              <th class="text-h5 text-center">Nome</th>
+              <th class="text-h5 text-center">Email</th>
+              <th class="text-h5 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center" v-for="usuario in usuarios" :key="usuario._id">
+              <td>{{ usuario._id }}</td>
+              <td>{{ usuario.userName }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>
+                <v-btn @click="opendeleteModal" class="text-decoration-none bg-red-darken-4">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-col>
+    </v-row>
+    <v-row class="d-flex justify-center mt-5">
+      <v-progress-circular v-if="isFetchingUsers" color="primary" indeterminate :size="74"
+        :width="8"></v-progress-circular>
+    </v-row>
 
-    <v-table theme="dark" class="overflow-x-auto">
-      <thead>
-        <tr>
-          <th class="text-h5 text-center">ID</th>
-          <th class="text-h5 text-center">Nome</th>
-          <th class="text-h5 text-center">Email</th>
-          <th class="text-h5 text-center">Ações</th>
-        </tr>
-      </thead>
+    <!-- Contatos Enviados -->
+    <v-row class="text-center">
+      <v-col cols="12">
+        <h2 class="my-3">Contatos Enviados</h2>
+      </v-col>
+    </v-row>
+  
 
-      <tbody>
-        <tr class="text-center" v-for="usuario in usuarios" :key="usuario._id">
-          <td>{{ usuario._id }}</td>
-          <td>{{ usuario.userName }}</td>
-          <td>{{ usuario.email }}</td>
-          <td>
-            <v-btn @click="deleteUser(usuario._id)" class="text-decoration-none bg-red-darken-4">
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
+    <v-row class="overflow-x-auto">
+      <v-col cols="12">
+        <v-table theme="dark">
+          <thead>
+            <tr>
+              <th class="text-h5 text-center">ID</th>
+              <th class="text-h5 text-center">Nome</th>
+              <th class="text-h5 text-center">Email</th>
+              <th class="text-h5 text-center">Mensagem</th>
+              <th class="text-h5 text-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center" v-for="contato in contatos" :key="contato._id">
+              <td>{{ contato._id }}</td>
+              <td>{{ contato.name }}</td>
+              <td>{{ contato.email }}</td>
+              <td>{{ contato.message }}</td>
+              <td>
+                <v-btn @click="openDeleteModal(contato._id, 'contato')" class="text-decoration-none bg-red-darken-4">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-col>
+    </v-row>
 
     <v-row class="d-flex justify-center mt-5">
-      <v-progress-circular v-if="isFetchingUsers" color="primary" indeterminate :size="74" :width="8"></v-progress-circular>
+      <v-progress-circular v-if="isFetching" color="primary" indeterminate :size="74" :width="8"></v-progress-circular>
     </v-row>
+
+    <!-- Modal for delete-->
+    <v-dialog v-model="deleteModal" max-width="230px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Confirma a deleção?</span>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="closeDeleteModal">Cancelar</v-btn>
+          <v-btn color="red darken-1" text @click="confirmDelete">Confirmar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <FooterComponent />
   </v-container>
 </template>
+
 
 <script setup lang="ts">
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 
+
 const router = useRouter();
-const contatos = useState('contatos', () => []);
-const usuarios = useState('usuarios', () => []);
-const isFetching = useState('isFetching', () => false);
-const isFetchingUsers = useState('isFetchingUsers', () => false);
-const isLogged = useState('isLogged', () => true);
+const contatos = ref([]);
+const usuarios = ref([]);
+const isFetching = ref(false);
+const isFetchingUsers = ref(false);
+const isLogged = ref(true);
+const deleteModal = ref(false);
+const deleteId = ref(null);
+const deleteType = ref('');
 
 const getContatos = async () => {
   try {
@@ -136,6 +166,28 @@ const deleteUser = async (userId) => {
   }
 };
 
+const openDeleteModal = (id, type) => {
+  deleteId.value = id;
+  deleteType.value = type;
+  deleteModal.value = true;
+};
+
+const closeDeleteModal = () => {
+  deleteModal.value = false;
+  deleteId.value = null;
+  deleteType.value = '';
+};
+
+const confirmDelete = () => {
+  if (deleteType.value === 'user') {
+    deleteUser(deleteId.value);
+  } else if (deleteType.value === 'contato') {
+    deleteContato(deleteId.value);
+  }
+  closeDeleteModal();
+};
+
+
 // Chama getContatos e getUsuarios ao montar o componente
 onMounted(() => {
   getContatos();
@@ -147,10 +199,8 @@ definePageMeta({
 });
 </script>
 
-
 <style scoped>
-
-.word-wrap-break {
-    word-wrap: break-word;
+.space{
+  height: 225px;
 }
 </style>
