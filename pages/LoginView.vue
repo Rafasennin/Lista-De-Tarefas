@@ -68,7 +68,6 @@ const validateInput = () => {
 
   return true;
 };
-
 const login = async () => {
   store.commit('SET_FETCHING', true);
   if (!validateInput()) {
@@ -77,12 +76,19 @@ const login = async () => {
   }
 
   try {
-    const response = await axios.post("https://lista-de-tarefas-back-end-plum.vercel.app/login", {
+    const response = await axios.post("http://localhost:8080/login", {
       email: email.value,
       password: password.value
     });
 
     const { token, user } = response.data;
+    
+    if (!user || !user.userName) {
+      console.error('Usuário não encontrado ou dados incompletos:', response.data);
+      alert('Usuário não encontrado. Verifique suas credenciais e tente novamente.');
+      store.commit('SET_FETCHING', false);
+      return;
+    }
 
     // Armazenar o nome do usuário e o ID no Vuex 
     store.commit('SET_USER_NAME', user.userName);
