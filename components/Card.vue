@@ -168,7 +168,7 @@ const addTask = async () => {
       };
 
       await axios.post("https://lista-de-tarefas-back-end-plum.vercel.app/tasks", task);
-      getTasks();
+     
       taskAuthor.value = '';
       taskName.value = '';
       taskContent.value = '';
@@ -178,6 +178,7 @@ const addTask = async () => {
       console.error("Erro ao enviar tarefa:", error);
     } finally {
       isAdding.value = false;
+      getTasks();
     }
   } else {
     alert("Por favor, preencha todos os campos obrigatórios.");
