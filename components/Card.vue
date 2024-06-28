@@ -140,7 +140,7 @@ const deleteType = ref('');
 const getTasks = async () => {
   try {
     isFetching.value = true;
-    const response = await axios.get("https://lista-de-tarefas-back-end-plum.vercel.app/tasks", {
+    const response = await axios.get("https://lista-de-tarefas-back-end-delta.vercel.app/tasks", {
       params: {
         userId: userId.value // Enviando o userId como parâmetro
       }
@@ -167,13 +167,20 @@ const addTask = async () => {
         userId: userId.value 
       };
 
-      await axios.post("https://lista-de-tarefas-back-end-plum.vercel.app/tasks", task);
-     
-      taskAuthor.value = '';
-      taskName.value = '';
-      taskContent.value = '';
-      taskReminderDate.value = '';
-      taskReminderHour.value = '';
+      const response = await axios.post("https://lista-de-tarefas-back-end-delta.vercel.app/tasks", task);
+      
+      if (response.status === 201) {
+        console.log("Tarefa adicionada com sucesso:", response.data);
+
+        // Limpar os campos após a adição bem-sucedida da tarefa
+        taskAuthor.value = '';
+        taskName.value = '';
+        taskContent.value = '';
+        taskReminderDate.value = '';
+        taskReminderHour.value = '';
+      } else {
+        console.error("Erro ao adicionar tarefa, status da resposta:", response.status);
+      }
     } catch (error) {
       console.error("Erro ao enviar tarefa:", error);
     } finally {
@@ -185,9 +192,10 @@ const addTask = async () => {
   }
 };
 
+
 const deleteTask = async (taskId: string) => {
   try {
-    await axios.delete(`https://lista-de-tarefas-back-end-plum.vercel.app/tasks/${taskId}`);
+    await axios.delete(`https://lista-de-tarefas-back-end-delta.vercel.app/tasks/${taskId}`);
     getTasks();
   } catch (error) {
     console.error("Erro ao excluir tarefa:", error);
@@ -244,7 +252,7 @@ const confirmEditTask = async () => {
       reminderHour: editTaskReminderHour.value
     };
 
-    await axios.put(`https://lista-de-tarefas-back-end-plum.vercel.app/tasks/${editTaskId.value}`, updatedTask);
+    await axios.put(`https://lista-de-tarefas-back-end-delta.vercel.app/tasks/${editTaskId.value}`, updatedTask);
     closeEditModal();
     getTasks();
   } catch (error) {

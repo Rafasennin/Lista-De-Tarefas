@@ -135,7 +135,7 @@ const deleteType = ref('');
 const getContatos = async () => {
   try {
     isFetching.value = true;
-    const response = await axios.get('https://lista-de-tarefas-back-end-plum.vercel.app/contatos');
+    const response = await axios.get('https://lista-de-tarefas-back-end-delta.vercel.app/contatos');
     contatos.value = response.data;
     isFetching.value = false;
   } catch (error) {
@@ -147,7 +147,7 @@ const getContatos = async () => {
 const getUsuarios = async () => {
   try {
     isFetchingUsers.value = true;
-    const response = await axios.get('https://lista-de-tarefas-back-end-plum.vercel.app/users');
+    const response = await axios.get('https://lista-de-tarefas-back-end-delta.vercel.app/users');
     usuarios.value = response.data;
     isFetchingUsers.value = false;
   } catch (error) {
@@ -158,7 +158,7 @@ const getUsuarios = async () => {
 
 const deleteContato = async (contatoId) => {
   try {
-    await axios.delete(`https://lista-de-tarefas-back-end-plum.vercel.app/contatos/${contatoId}`);
+    await axios.delete(`https://lista-de-tarefas-back-end-delta.vercel.app/contatos/${contatoId}`);
     getContatos(); // Atualiza a lista após a exclusão
   } catch (error) {
     console.error('Erro ao excluir contato:', error);
@@ -167,7 +167,7 @@ const deleteContato = async (contatoId) => {
 
 const deleteUser = async (userId) => {
   try {
-    await axios.delete(`https://lista-de-tarefas-back-end-plum.vercel.app/users/${userId}`);
+    await axios.delete(`https://lista-de-tarefas-back-end-delta.vercel.app/users/${userId}`);
     getUsuarios(); // Atualiza a lista após a exclusão
   } catch (error) {
     console.error('Erro ao excluir usuário:', error);
