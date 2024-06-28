@@ -174,7 +174,6 @@ const addTask = async () => {
         console.log("Tarefa adicionada com sucesso:", response.data);
 
 
-
       } else {
         console.error("Erro ao adicionar tarefa, status da resposta:", response.status);
       }
