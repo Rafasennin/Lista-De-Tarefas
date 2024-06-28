@@ -41,7 +41,8 @@
           <td>{{ task.reminderDate }}</td>
           <td>{{ task.reminderHour }}</td>
           <td>
-            <v-btn v-if="loginStatus" @click="openDeleteModal(task._id, 'task')" class="text-decoration-none bg-red-darken-4">
+            <v-btn v-if="loginStatus" @click="openDeleteModal(task._id, 'task')"
+              class="text-decoration-none bg-red-darken-4">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </td>
@@ -164,26 +165,28 @@ const addTask = async () => {
         text: taskContent.value,
         reminderDate: taskReminderDate.value,
         reminderHour: taskReminderHour.value,
-        userId: userId.value 
+        userId: userId.value
       };
 
       const response = await axios.post("https://lista-de-tarefas-back-end-delta.vercel.app/tasks", task);
-      
-      if (response.status === 201) {
+
+      if (response) {
         console.log("Tarefa adicionada com sucesso:", response.data);
 
-        // Limpar os campos após a adição bem-sucedida da tarefa
-        taskAuthor.value = '';
-        taskName.value = '';
-        taskContent.value = '';
-        taskReminderDate.value = '';
-        taskReminderHour.value = '';
+
+
       } else {
         console.error("Erro ao adicionar tarefa, status da resposta:", response.status);
       }
     } catch (error) {
       console.error("Erro ao enviar tarefa:", error);
     } finally {
+      // Limpar os campos após a adição bem-sucedida da tarefa
+      taskAuthor.value = '';
+      taskName.value = '';
+      taskContent.value = '';
+      taskReminderDate.value = '';
+      taskReminderHour.value = '';
       isAdding.value = false;
       getTasks();
     }
@@ -237,7 +240,7 @@ const closeDeleteModal = () => {
 const confirmDelete = () => {
   if (deleteType.value === 'task') {
     deleteTask(deleteId.value);
-  } 
+  }
   closeDeleteModal();
 };
 
