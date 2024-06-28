@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" temporary>
       <v-list nav dense>
         <nuxt-link to="/" exact>
-          <v-list-item prepend-icon="mdi-home-city" title="Home"></v-list-item>
+          <v-list-item prepend-icon="mdi-clipboard-list-outline" title="Lista"></v-list-item>
         </nuxt-link>
         <nuxt-link to="/Contact">
           <v-list-item prepend-icon="mdi-email" title="Contato"></v-list-item>
@@ -31,8 +31,8 @@
 
         <nuxt-link to="/" exact class="hidden-sm-and-down">
           <v-btn icon>
-            <v-icon color="blue-darken-2" size="large">mdi-home</v-icon>
-            <span>Home</span>
+            <v-icon color="blue-darken-2" size="large">mdi-clipboard-list-outline</v-icon>
+            <span>Lista</span>
           </v-btn>
         </nuxt-link>
 
